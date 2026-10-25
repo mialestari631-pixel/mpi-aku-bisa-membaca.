@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fff3d6">
+<title>AKU BISA MEMBACA | MPI TK Kembali Mekar</title>
+<style>
+:root{--ink:#26334a;--pink:#ff7194;--yellow:#ffd45e;--blue:#7bd3f7;--green:#8be0b0;--purple:#b5a1ff;--paper:#fffdf7;--shadow:0 8px 0 rgba(38,51,74,.10)}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);font-family:"Trebuchet MS",system-ui,sans-serif;background:linear-gradient(135deg,#fff1d6,#f1faff 55%,#fff0f5);min-height:100vh}
+button,select{font:inherit}button{cursor:pointer;border:0;color:var(--ink);font-weight:800;border-radius:18px;padding:12px 18px;box-shadow:var(--shadow);transition:transform .12s}button:hover{transform:translateY(-2px)}button:active{transform:translateY(2px);box-shadow:none}button:focus-visible,select:focus-visible{outline:4px solid #26334a;outline-offset:3px}
+.app{max-width:1100px;margin:auto;padding:16px}.top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}.brand{display:flex;gap:12px;align-items:center}.logo{font-size:2.5rem;background:#fff;border-radius:20px;padding:8px;box-shadow:var(--shadow)}h1{font-size:clamp(1.35rem,4vw,2.2rem);margin:0;color:#f05b83} .subtitle{margin:3px 0 0;font-size:.95rem}.top-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.top-controls select{border:2px solid #d8e4ed;border-radius:14px;padding:10px;background:white;font-weight:700}
+.progress-wrap{margin:18px 0 12px;background:#fff;border-radius:20px;padding:10px 14px;box-shadow:var(--shadow)}.progress-label{display:flex;justify-content:space-between;font-weight:800;font-size:.9rem;margin-bottom:7px}.bar{height:12px;background:#e8edf4;border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#8be0b0,#7bd3f7);transition:width .3s}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.nav button{background:#fff;flex:1;min-width:100px;padding:11px 10px}.nav button.active{background:var(--yellow);transform:translateY(-2px)}
+.panel{background:rgba(255,255,255,.92);border:3px solid white;border-radius:28px;padding:clamp(16px,3vw,30px);box-shadow:0 12px 0 rgba(38,51,74,.08);min-height:360px}.welcome{text-align:center;padding:10px}.hero{font-size:clamp(4rem,12vw,7rem);margin:8px}.welcome h2{font-size:clamp(1.7rem,5vw,2.8rem);margin:8px}.welcome p{max-width:650px;margin:10px auto 20px;line-height:1.6}.primary{background:var(--pink);color:white}.secondary{background:var(--blue)}.sunny{background:var(--yellow)}.mint{background:var(--green)}.soft{background:#f0edff}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:13px;margin:18px 0}.choice{background:#fff;border:3px solid #eaf0f5;min-height:118px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;font-size:1.1rem}.choice .big{font-size:2.6rem}.choice.correct{border-color:#42c987;background:#e9fff3}.choice.wrong{border-color:#ff7194;background:#fff0f4}.section-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.section-head .emoji{font-size:2.6rem}.section-head h2{margin:0;font-size:clamp(1.4rem,4vw,2rem)}.section-head p{margin:5px 0 0}.task{background:#fff7df;border-radius:22px;padding:18px;text-align:center;margin:18px 0}.prompt{font-size:clamp(1.5rem,5vw,2.6rem);font-weight:900;letter-spacing:1px;margin:12px}.hint{color:#56647a;font-size:.95rem}.feedback{min-height:34px;font-size:1.1rem;font-weight:900;margin:12px 0}.feedback.good{color:#13864d}.feedback.try{color:#c34d6a}.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:15px}.letter{font-size:3rem!important}.word-image{font-size:5rem;line-height:1.2}.syllables{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px}.syllable{font-size:2rem;background:#dff5ff;min-width:72px}.syllable:nth-child(2n){background:#ffebf0}.syllable:nth-child(3n){background:#e9ffe9}.small{font-size:.88rem;color:#68748a}.footer{text-align:center;padding:18px;font-size:.85rem;color:#627087}.hidden{display:none!important}
+@media(max-width:560px){.app{padding:10px}.logo{font-size:2rem}.top{align-items:flex-start}.nav button{min-width:30%;font-size:.9rem}.panel{min-height:400px}.choice{min-height:100px;padding:10px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+  <div class="brand"><div class="logo" aria-hidden="true">📚</div><div><h1>AKU BISA MEMBACA!</h1><p class="subtitle">Media Pembelajaran Interaktif • TK Kembali Mekar</p></div></div>
+  <div class="top-controls"><label for="kelas"><strong>Kelompok:</strong></label><select id="kelas" aria-label="Pilih kelompok belajar"><option value="A">TK A — mulai dari huruf</option><option value="B">TK B — huruf, suku kata, kata</option></select><button class="secondary" id="soundBtn" type="button" aria-pressed="true">🔊 Suara: ON</button></div>
+</header>
+<div class="progress-wrap"><div class="progress-label"><span>⭐ Bintang belajarku</span><span id="scoreLabel">0 bintang</span></div><div class="bar"><span id="progressBar"></span></div></div>
+<nav class="nav" aria-label="Menu belajar">
+  <button class="active" data-page="home">🏠 Beranda</button><button data-page="huruf">🔤 Huruf</button><button data-page="bunyi">👂 Bunyi awal</button><button data-page="suku">🧩 Suku kata</button><button data-page="kata">📖 Baca kata</button><button data-page="tantangan">🏆 Tantangan</button>
+</nav>
+<main class="panel" id="main" aria-live="polite"></main>
+<footer class="footer">Belajar dengan gembira, satu langkah setiap hari 💛 • Gunakan bersama guru atau orang tua.</footer>
+</div>
+<script>
+(() => {
+'use strict';
+const $ = id => document.getElementById(id);
+const main = $('main');
+let page = 'home', score = 0, soundOn = true, taskIndex = 0, correctCount = 0;
+const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const letterWords = {A:['Apel','🍎'],B:['Bola','⚽'],C:['Cicak','🦎'],D:['Dadu','🎲'],E:['Elang','🦅'],F:['Foto','🖼️'],G:['Gajah','🐘'],H:['Hati','❤️'],I:['Ikan','🐟'],J:['Jeruk','🍊'],K:['Kuda','🐴'],L:['Lampu','💡'],M:['Mata','👀'],N:['Nanas','🍍'],O:['Obat','🩹'],P:['Padi','🌾'],Q:['Quran','📗'],R:['Roti','🍞'],S:['Sapi','🐮'],T:['Topi','👒'],U:['Ular','🐍'],V:['Vas','🏺'],W:['Wortel','🥕'],X:['Xilofon','🎼'],Y:['Yoyo','🪀'],Z:['Zebra','🦓']};
+const items = [
+ {word:'BOLA',sy:['BO','LA'],emoji:'⚽',initial:'B'}, {word:'BUKU',sy:['BU','KU'],emoji:'📘',initial:'B'},
+ {word:'TOPI',sy:['TO','PI'],emoji:'👒',initial:'T'}, {word:'SAPI',sy:['SA','PI'],emoji:'🐮',initial:'S'},
+ {word:'MATA',sy:['MA','TA'],emoji:'👀',initial:'M'}, {word:'ROTI',sy:['RO','TI'],emoji:'🍞',initial:'R'},
+ {word:'KAKI',sy:['KA','KI'],emoji:'🦶',initial:'K'}, {word:'IKAN',sy:['I','KAN'],emoji:'🐟',initial:'I'},
+ {word:'BEBEK',sy:['BE','BEK'],emoji:'🦆',initial:'B'}, {word:'GIGI',sy:['GI','GI'],emoji:'😁',initial:'G'}
+];
+const shuffle = arr => [...arr].sort(() => Math.random()-.5);
+function speak(text){ if(!soundOn || !('speechSynthesis' in window)) return; try{speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text);u.lang='id-ID';u.rate=.82;u.pitch=1.08;speechSynthesis.speak(u);}catch(e){} }
+function award(msg='Hebat! Kamu berhasil!'){score++;$('scoreLabel').textContent=score+' bintang';$('progressBar').style.width=Math.min(100,score*7)+'%';say(msg,true);}
+function say(msg,good=false){const f=$('feedback');if(f){f.textContent=msg;f.className='feedback '+(good?'good':'try');}}
+function btn(label,cls,fn){const b=document.createElement('button');b.textContent=label;b.className=cls||'secondary';b.type='button';b.addEventListener('click',fn);return b;}
+function section(emoji,title,desc){const h=document.createElement('div');h.className='section-head';h.innerHTML=`<div class="emoji">${emoji}</div><div><h2>${title}</h2><p>${desc}</p></div>`;return h;}
+function go(p){page=p;document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===p));taskIndex=0;correctCount=0;render();}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));
+$('kelas').addEventListener('change',()=>{render();});
+$('soundBtn').addEventListener('click',()=>{soundOn=!soundOn;$('soundBtn').textContent=soundOn?'🔊 Suara: ON':'🔇 Suara: OFF';$('soundBtn').setAttribute('aria-pressed',String(soundOn));if(!soundOn&&'speechSynthesis'in window)speechSynthesis.cancel();});
+function render(){
+ main.innerHTML='';
+ if(page==='home'){home();return}
+ if(page==='huruf'){letterPage();return}
+ if(page==='bunyi'){soundPage();return}
+ if(page==='suku'){syllablePage();return}
+ if(page==='kata'){wordPage();return}
+ if(page==='tantangan'){challengePage();return}
+}
+function home(){
+ const a=$('kelas').value==='A';
+ const box=document.createElement('div');box.className='welcome';
+ box.innerHTML=`<div class="hero">🧒🏻📚✨</div><h2>Halo, Teman Pintar!</h2><p>Selamat datang di <strong>AKU BISA MEMBACA</strong>. Ayo bermain sambil mengenal huruf, mendengarkan bunyi, dan membaca!</p><p><strong>Hari ini kita belajar:</strong> ${a?'mengenal huruf, menyebut bunyinya, dan menemukan bunyi awal kata.':'mengenal huruf, merangkai suku kata, dan membaca kata sederhana.'}</p>`;
+ const actions=document.createElement('div');actions.className='actions';
+ actions.append(btn('Mulai Belajar 🔤','primary',()=>go('huruf')),btn('Main Tantangan 🏆','sunny',()=>go('tantangan')));
+ box.append(actions);
+ const note=document.createElement('p');note.className='small';note.textContent='Petunjuk: tekan tombol gambar untuk mendengar kata. Tidak perlu terburu-buru—coba lagi jika belum tepat.';
+ box.append(note);main.append(box);
+}
+function letterPage(){
+ main.append(section('🔤','Ayo Kenal Huruf!','Tekan kartu huruf untuk mendengar nama huruf dan contoh katanya.'));
+ const grid=document.createElement('div');grid.className='cards';
+ letters.forEach(l=>{const data=letterWords[l];const b=btn('', 'choice letter',()=>{speak('Huruf '+l+'. '+data[0]);say('Huruf '+l+' seperti '+data[0]+'. Ayo ucapkan bersama!',true);});b.innerHTML=`<span class="big">${l}</span><span style="font-size:1.8rem">${data[1]}</span><span style="font-size:.9rem">${data[0]}</span>`;grid.append(b);});
+ const fb=document.createElement('div');fb.id='feedback';fb.className='feedback';fb.textContent='Pilih salah satu kartu huruf.';main.append(grid,fb);
+}
+function soundPage(){
+ const target=items[taskIndex%items.length];const opts=shuffle([target,...shuffle(items.filter(x=>x.initial!==target.initial)).slice(0,3)]);
+ main.append(section('👂','Detektif Bunyi Awal','Dengarkan kata, lalu pilih huruf yang terdengar di awal kata.'));
+ const task=document.createElement('div');task.className='task';task.innerHTML=`<div class="word-image">${target.emoji}</div><p class="hint">Tekan tombol untuk mendengarkan.</p>`;
+ task.append(btn('🔊 Dengarkan kata','secondary',()=>speak(target.word.toLowerCase())));
+ const p=document.createElement('div');p.className='prompt';p.textContent='Huruf apa yang terdengar di awal?';task.append(p);
+ const grid=document.createElement('div');grid.className='cards';
+ opts.forEach(x=>{const b=btn(x.initial,'choice letter',()=>{if(x===target){award('Betul! '+target.word+' dimulai dengan huruf '+target.initial+'.');correctCount++;}else say('Coba dengarkan lagi, ya.');});grid.append(b);});
+ const fb=document.createElement('div');fb.id='feedback';fb.className='feedback';const next=btn('Soal berikutnya ➜','sunny',()=>{taskIndex++;render();});
+ const actions=document.createElement('div');actions.className='actions';actions.append(next);
+ main.append(task,grid,fb,actions);
+}
+function syllablePage(){
+ const a=$('kelas').value==='A';const target=items[taskIndex%items.length];
+ main.append(section('🧩','Ayo Bermain Suku Kata',a?'Untuk TK A: dengar dan tirukan suku kata bersama guru.':'Untuk TK B: pilih suku kata untuk melengkapi kata.'));
+ const task=document.createElement('div');task.className='task';task.innerHTML=`<div class="word-image">${target.emoji}</div><div class="prompt">${a?'Dengar dan ucapkan:': 'Baca suku kata ini:'}</div>`;
+ const syll=document.createElement('div');syll.className='syllables';target.sy.forEach(s=>syll.append(btn(s,'syllable',()=>speak(s.toLowerCase()))));
+ task.append(syll,btn('🔊 Dengarkan kata','secondary',()=>speak(target.word.toLowerCase())));
+ const fb=document.createElement('div');fb.id='feedback';fb.className='feedback';fb.textContent=a?'Ayo tepuk tangan setiap suku kata!':'Susun suku kata sesuai urutan untuk membaca kata.';
+ const actions=document.createElement('div');actions.className='actions';
+ if(!a){actions.append(btn('Aku berhasil membaca ⭐','mint',()=>award('Hebat! Kamu membaca '+target.word+'.')));}
+ actions.append(btn('Kata berikutnya ➜','sunny',()=>{taskIndex++;render();}));
+ main.append(task,fb,actions);
+}
+function wordPage(){
+ const target=items[taskIndex%items.length];const opts=shuffle([target,...shuffle(items.filter(x=>x.word!==target.word)).slice(0,3)]);
+ main.append(section('📖','Cocokkan Gambar dan Kata','Pilih kata yang sesuai dengan gambar.'));
+ const task=document.createElement('div');task.className='task';task.innerHTML=`<div class="word-image">${target.emoji}</div><div class="prompt">Aku gambar apa?</div>`;
+ task.append(btn('🔊 Dengarkan petunjuk','secondary',()=>speak('Cari kata '+target.word.toLowerCase())));
+ const grid=document.createElement('div');grid.className='cards';
+ opts.forEach(x=>{const b=btn(x.word,'choice',()=>{if(x===target){b.classList.add('correct');award('Benar! Ini '+target.word+'.');speak(target.word.toLowerCase());}else{b.classList.add('wrong');say('Belum tepat. Coba lihat gambar dan dengarkan lagi.');}});grid.append(b);});
+ const fb=document.createElement('div');fb.id='feedback';fb.className='feedback';const actions=document.createElement('div');actions.className='actions';actions.append(btn('Kata berikutnya ➜','sunny',()=>{taskIndex++;render();}));
+ main.append(task,grid,fb,actions);
+}
+function challengePage(){
+ const target=items[taskIndex%items.length];const a=$('kelas').value==='A';
+ main.append(section('🏆','Tantangan Teman Pintar','Selesaikan tantangan dengan tenang. Kamu boleh mencoba lagi!'));
+ const task=document.createElement('div');task.className='task';
+ if(a){
+  task.innerHTML=`<div class="word-image">${target.emoji}</div><div class="prompt">Kata ini dimulai dengan bunyi apa?</div>`;
+  task.append(btn('🔊 Dengarkan: '+target.word,'secondary',()=>speak(target.word.toLowerCase())));
+  const opts=shuffle([target.initial,...shuffle(letters.filter(l=>l!==target.initial)).slice(0,2)]);
+  const grid=document.createElement('div');grid.className='cards';opts.forEach(l=>grid.append(btn(l,'choice letter',()=>{if(l===target.initial)award('Hebat! Bunyi awalnya '+l+'.');else say('Ayo coba sekali lagi!');})));
+  const fb=document.createElement('div');fb.id='feedback';fb.className='feedback';const actions=document.createElement('div');actions.className='actions';actions.append(btn('Tantangan berikutnya ➜','sunny',()=>{taskIndex++;render();}));main.append(task,grid,fb,actions);
+ }else{
+  task.innerHTML=`<div class="word-image">${target.emoji}</div><div class="prompt">Susun dan baca kata ini!</div><div class="syllables">${target.sy.map(s=>`<span class="syllable" style="display:inline-block;padding:10px 18px;border-radius:16px;font-weight:900">${s}</span>`).join('')}</div><div class="prompt">${target.word}</div>`;
+  task.append(btn('🔊 Dengarkan kata','secondary',()=>speak(target.word.toLowerCase())));
+  const actions=document.createElement('div');actions.className='actions';actions.append(btn('Aku bisa membaca! ⭐','mint',()=>award('Luar biasa! Kamu membaca '+target.word+'.')),btn('Kata berikutnya ➜','sunny',()=>{taskIndex++;render();}));main.append(task,actions);
+ }
+}
+render();
+})();
+</script>
+</body>
+</html>
